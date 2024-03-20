@@ -16,8 +16,11 @@ namespace FitNotes.Api.Data
         {
             // connect to postgres with connection string from app settings
             options.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
+
         }
 
         public DbSet<Exercises> Exercises { get; set; }
+        public DbSet<Sets> Sets { get; set; }
+        public DbSet<Users> User { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using FitNotes.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FitNotes.Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240320220154_ExerciseFK")]
+    partial class ExerciseFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,6 +58,9 @@ namespace FitNotes.Api.Migrations
 
                     b.Property<string>("Comment")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("ExerciseId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("ExercisesId")
                         .HasColumnType("uuid");

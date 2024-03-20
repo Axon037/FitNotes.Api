@@ -3,6 +3,7 @@ using System;
 using FitNotes.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FitNotes.Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240319183533_ErrorFix2")]
+    partial class ErrorFix2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,12 @@ namespace FitNotes.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Exercises");
                 });
@@ -55,9 +63,6 @@ namespace FitNotes.Api.Migrations
 
                     b.Property<string>("Comment")
                         .HasColumnType("text");
-
-                    b.Property<Guid>("ExercisesId")
-                        .HasColumnType("uuid");
 
                     b.Property<bool>("IsMetric")
                         .HasColumnType("boolean");
@@ -76,12 +81,10 @@ namespace FitNotes.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExercisesId");
-
                     b.ToTable("Sets");
                 });
 
-            modelBuilder.Entity("FitNotes.Api.Entities.Users", b =>
+            modelBuilder.Entity("FitNotes.Api.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,20 +107,15 @@ namespace FitNotes.Api.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("FitNotes.Api.Entities.Sets", b =>
+            modelBuilder.Entity("FitNotes.Api.Entities.Exercises", b =>
                 {
-                    b.HasOne("FitNotes.Api.Entities.Exercises", "Exercises")
-                        .WithMany("Sets")
-                        .HasForeignKey("ExercisesId")
+                    b.HasOne("FitNotes.Api.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Exercises");
-                });
-
-            modelBuilder.Entity("FitNotes.Api.Entities.Exercises", b =>
-                {
-                    b.Navigation("Sets");
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

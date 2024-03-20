@@ -1,52 +1,48 @@
-﻿using FitNotes.Api.UseCases.Exercises.Add;
-using FitNotes.Api.UseCases.Exercises.Delete;
-using FitNotes.Api.UseCases.Exercises.GetAll;
-using FitNotes.Api.UseCases.Exercises.GetDetails;
-using FitNotes.Api.UseCases.Exercises.Update;
+﻿using FitNotes.Api.UseCases.Sets.Add;
+using FitNotes.Api.UseCases.Sets.Delete;
+using FitNotes.Api.UseCases.Sets.GetAll;
+using FitNotes.Api.UseCases.Sets.GetDetails;
+using FitNotes.Api.UseCases.Sets.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitNotes.Api.Controllers
 {
     [ApiController]
-    [Route("Exercises")]
-    public class ExercisesController : ControllerBase
+    [Route("Sets")]
+    public class SetsController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<List<GetExercisesModel>>> GetAllExercises(
+        public async Task<ActionResult<List<GetSetsModel>>> GetAllSets(
             [FromServices] IMediator _mediator,
             CancellationToken cancellationToken)
         {
-            var results = await _mediator.Send(new GetExercisesQuery(), cancellationToken);
+            var results = await _mediator.Send(new GetSetsQuery(), cancellationToken);
 
             return Ok(results);
         }
 
         [HttpGet("{Id}")]
-        public async Task<ActionResult<GetDetailsModel>> GetExercisesDetail(
+        public async Task<ActionResult<GetSetsDetailsModel>> GetSetDetails(
             [FromServices] IMediator _mediator,
             [FromRoute] Guid Id,
             CancellationToken cancellationToken)
         {
-            var results = await _mediator.Send(new GetDetailsQuery()
+            var results = await _mediator.Send(new GetSetsDetailsQuery()
             {
                 Id = Id
             }, cancellationToken);
 
-            //if(results is null)
-            //{
-            //    return NotFound(results);
-            //}
             return Ok(results);
         }
 
         [HttpPost]
-        public async Task<ActionResult<AddExerciseModel>> AddExercise(
+        public async Task<ActionResult<AddSetsModel>> AddSets(
             [FromServices] IMediator _mediator,
-            [FromBody] AddExerciseModel model,
+            [FromBody] AddSetsModel model,
             CancellationToken cancellationToken)
         {
-            var results = await _mediator.Send(new AddExerciseCommand()
+            var results = await _mediator.Send(new AddSetsCommand()
             {
                 Model = model,
             }, cancellationToken);
@@ -55,12 +51,12 @@ namespace FitNotes.Api.Controllers
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ActionResult> DeleteExercise(
+        public async Task<ActionResult> DeleteSets(
             [FromServices] IMediator _mediator,
             [FromRoute] Guid Id,
             CancellationToken cancellationToken)
         {
-            await _mediator.Send(new DelExerciseCommand()
+            await _mediator.Send(new DeleteSetsCommand()
             {
                 Id = Id,
             }, cancellationToken);
@@ -69,13 +65,13 @@ namespace FitNotes.Api.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task<ActionResult> UpdateExercise(
+        public async Task<ActionResult> UpdateSets(
             [FromServices] IMediator _mediator,
             [FromRoute] Guid Id,
-            [FromBody] UpdateExerciseModel model,
+            [FromBody] UpdateSetsModel model,
             CancellationToken cancellationToken)
         {
-            await _mediator.Send(new UpdateExerciseCommand()
+            await _mediator.Send(new UpdateSetsCommand()
             {
                 Id = Id,
                 Model = model
@@ -86,5 +82,3 @@ namespace FitNotes.Api.Controllers
     }
 }
 
-// Ctrl + K, Ctrl + C - comment
-// Ctrk + K, Ctrl + U - uncomment

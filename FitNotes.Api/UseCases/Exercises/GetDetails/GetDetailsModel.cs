@@ -1,12 +1,13 @@
-﻿namespace FitNotes.Api.Entities
+﻿using FitNotes.Api.Entities;
+
+namespace FitNotes.Api.UseCases.Exercises.GetDetails
 {
-    public class Exercises
+    public class GetDetailsModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string MuscleGroups { get; set; }
         public bool IsMetric { get; set; }
         public string? Description { get; set; }
-        public virtual ICollection<Sets> Sets { get; set; }
     }
 }

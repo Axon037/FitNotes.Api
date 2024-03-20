@@ -1,3 +1,7 @@
+using FitNotes.Api.Data;
+using System.Reflection;
+using MediatR;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg =>
 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddDbContext<DatabaseContext>();
+
+
 
 
 var app = builder.Build();

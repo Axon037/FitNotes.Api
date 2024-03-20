@@ -3,6 +3,7 @@ using System;
 using FitNotes.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FitNotes.Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240310223654_SetsNullable")]
+    partial class SetsNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +32,7 @@ namespace FitNotes.Api.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsMetric")
@@ -56,9 +60,6 @@ namespace FitNotes.Api.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ExercisesId")
-                        .HasColumnType("uuid");
-
                     b.Property<bool>("IsMetric")
                         .HasColumnType("boolean");
 
@@ -76,48 +77,7 @@ namespace FitNotes.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExercisesId");
-
                     b.ToTable("Sets");
-                });
-
-            modelBuilder.Entity("FitNotes.Api.Entities.Users", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("FitNotes.Api.Entities.Sets", b =>
-                {
-                    b.HasOne("FitNotes.Api.Entities.Exercises", "Exercises")
-                        .WithMany("Sets")
-                        .HasForeignKey("ExercisesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Exercises");
-                });
-
-            modelBuilder.Entity("FitNotes.Api.Entities.Exercises", b =>
-                {
-                    b.Navigation("Sets");
                 });
 #pragma warning restore 612, 618
         }

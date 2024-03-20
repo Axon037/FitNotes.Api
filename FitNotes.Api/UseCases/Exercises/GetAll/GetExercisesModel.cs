@@ -1,4 +1,4 @@
-﻿namespace FitNotes.Api.UseCases.GetExercises
+﻿namespace FitNotes.Api.UseCases.Exercises.GetAll
 {
     public class GetExercisesModel
     {
