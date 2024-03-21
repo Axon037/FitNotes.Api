@@ -10,5 +10,6 @@
         public string? Comment { get; set; }
         public string? Tempo { get; set; }
         public Guid ExerciseId { get; set; }
+        public Guid UserId { get; set; }
     }
 }

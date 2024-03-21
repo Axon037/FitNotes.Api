@@ -11,6 +11,11 @@ namespace FitNotes.Api.Entities
                 .HasOne(x => x.Exercises)
                 .WithMany(x => x.Sets)
                 .HasForeignKey(x => x.Exercises.Id);
+
+            builder
+                .HasOne(x => x.Users)
+                .WithMany(x => x.Sets)
+                .HasForeignKey(x => x.Users.Id);
         }
     }
 }

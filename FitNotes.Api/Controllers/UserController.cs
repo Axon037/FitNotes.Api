@@ -1,7 +1,4 @@
-﻿using FitNotes.Api.UseCases.Sets.Add;
-using FitNotes.Api.UseCases.Sets.Delete;
-using FitNotes.Api.UseCases.Sets.Update;
-using FitNotes.Api.UseCases.User.Add;
+﻿using FitNotes.Api.UseCases.User.Add;
 using FitNotes.Api.UseCases.User.Delete;
 using FitNotes.Api.UseCases.User.GetAll;
 using FitNotes.Api.UseCases.User.GetDetails;

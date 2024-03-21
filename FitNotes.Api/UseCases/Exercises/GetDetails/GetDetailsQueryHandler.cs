@@ -22,8 +22,9 @@ namespace FitNotes.Api.UseCases.Exercises.GetDetails
                 Id = x.Id,
                 Name = x.Name,
                 MuscleGroups = x.MuscleGroups,
-                IsMetric = x.IsMetric,
+                IsMetric = x.IsTime,
                 Description = x.Description,
+                CreatedByUserId = x.Users.Id
             })
             .FirstOrDefaultAsync(cancellationToken);
             return exercise;

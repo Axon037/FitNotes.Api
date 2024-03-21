@@ -18,7 +18,7 @@ namespace FitNotes.Api.UseCases.Exercises.Update
 
             exercise.Name = request.Model.Name;
             exercise.MuscleGroups = request.Model.MuscleGroups;
-            exercise.IsMetric = request.Model.IsMetric;
+            exercise.IsTime = request.Model.IsMetric;
             exercise.Description = request.Model.Description;
 
             await _databaseContext.SaveChangesAsync(cancellationToken);

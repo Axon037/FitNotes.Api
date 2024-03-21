@@ -21,7 +21,7 @@ namespace FitNotes.Api.UseCases.Exercises.Add
                 Id = exerciseId,
                 Name = request.Model.Name,
                 MuscleGroups = request.Model.MuscleGroups,
-                IsMetric = request.Model.IsMetric,
+                IsTime = request.Model.IsMetric,
                 Description = request.Model.Description,
             });
 

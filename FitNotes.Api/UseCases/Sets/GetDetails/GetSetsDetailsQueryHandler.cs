@@ -26,7 +26,8 @@ namespace FitNotes.Api.UseCases.Sets.GetDetails
                 RPE = x.RPE,
                 Comment = x.Comment,
                 Tempo = x.Tempo,
-                ExerciseId = x.Exercises.Id
+                ExerciseId = x.Exercises.Id,
+                UserId = x.Users.Id
             })
             .FirstOrDefaultAsync(cancellationToken);
             return set;
